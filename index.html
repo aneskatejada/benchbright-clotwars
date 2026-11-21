@@ -4,11 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#06111d" />
-  <meta name="description" content="BenchBright Learning Clot Wars 3D model integration preview" />
-  <title>Clot Wars | 3D Model Preview</title>
+  <meta name="description" content="BenchBright Learning Clot Wars — Hemophilia A 3D hemostasis concept preview" />
+  <title>Clot Wars | Inside the Bloodstream</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    #scene-root { position:absolute; inset:0; }
+    #scene-root canvas { width:100%;height:100%;display:block;touch-action:none; }
+    .model-status{font-size:11px;color:#a5becd;background:#071724db;padding:7px 10px;border-radius:8px;}
+    .footer-note{font-size:12px;color:#8fa7b9;line-height:1.6;margin:12px 2px 0;}
+    button:focus-visible{outline:2px solid #45d4d4;outline-offset:3px}
+    @media(max-width:520px){.model-status{font-size:9px;max-width:190px}.view-tabs{max-width:calc(100% - 24px)} }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}
+  </script>
+  <script type="module" src="./game.js"></script>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <div class="app">
+    <header class="header">
+      <div class="brand-icon">B</div>
+      <div class="brand-text"><strong>BENCHBRIGHT</strong><span>LEARNING LAB</span></div>
+      <div class="header-right"><span class="header-pill">3D INTEGRATION PREVIEW</span></div>
+    </header>
+    <main class="layout">
+      <section class="viewer-area">
+        <div class="intro"><span class="eyebrow">MISSION 01 / HEMOSTASIS</span><h1>Clot Wars <span>Inside the Bloodstream</span></h1><p>Explore normal coagulation and factor VIII deficiency in a 3D concept scene.</p></div>
+        <div class="viewport">
+          <div id="scene-root" aria-label="Interactive 3D scene showing blood cells and platelets"></div>
+          <div class="view-tabs"><button type="button" id="view-flow" class="selected" aria-pressed="true">Bloodstream</button><button type="button" id="view-anatomy" aria-pressed="false">Vessel anatomy</button></div>
+          <div class="orbit-help">Drag to rotate · Pinch to zoom</div>
+          <div class="bottom-controls"><button type="button" id="play-pause" class="play">❚❚ Pause</button><span class="model-status" id="model-status" aria-live="polite">Preparing 3D scene…</span></div>
+        </div>
+        <p class="caption">The bloodstream uses your red blood cell and platelet GLB assets when uploaded. The anatomical model appears under “Vessel anatomy.” Otherwise, the scene displays temporary 3D stand-ins.</p>
+      </section>
+      <aside class="sidebar">
+        <div class="panel-heading"><span class="eyebrow">SIMULATION CONTROL</span><h2>Hemostasis phases</h2></div>
+        <div class="phase-options">
+          <button type="button" class="phase" data-phase="normal" aria-pressed="false"><span class="phase-number">01</span><span class="phase-label">Normal hemostasis<small>Fibrin-stabilized clot</small></span><span class="phase-arrow">›</span></button>
+          <button type="button" class="phase active" data-phase="deficiency" aria-pressed="true"><span class="phase-number">02</span><span class="phase-label">Hemophilia A<small>Reduced fibrin reinforcement</small></span><span class="phase-arrow">›</span></button>
+          <button type="button" class="phase" data-phase="corrected" aria-pressed="false"><span class="phase-number">03</span><span class="phase-label">FVIII replacement<small>Simulated restoration</small></span><span class="phase-arrow">›</span></button>
+        </div>
+        <div class="info-block"><div id="phase-status" class="status warning"><span class="dot"></span><span id="phase-name">Hemophilia A</span></div><h3 id="phase-title">Factor VIII deficiency</h3><p id="phase-description">Platelets can form an initial plug, but reduced factor VIII activity impairs thrombin generation and fibrin reinforcement.</p></div>
+        <div class="legend"><div class="eyebrow">VISIBLE ELEMENTS</div><div><i class="legend-rbc"></i> Red blood cells <span id="rbc-legend">3D placeholder</span></div><div><i class="legend-plt"></i> Platelets <span id="plt-legend">3D placeholder</span></div><div><i class="legend-fibrin"></i> Fibrin strands <span>illustrative</span></div></div>
+        <p class="caveat">Educational concept preview only—not a validated physiologic simulation, clinical calculator, or substitute for clinical judgment. The imported model files have no embedded animations.</p>
+      </aside>
+    </main>
+  </div>
 </body>
 </html>
